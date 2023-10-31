@@ -40,23 +40,23 @@ export default function Home() {
     }
   };
   const onDragStart = (idx) => {
-    // e.preventDefault();
     setDragAndDropIndex({
       type: "dragItem",
       payload: idx,
     });
   };
   const onDragEnter = (idx) => {
-    //e.preventDefault();
+    let fake = [...images];
     setDragAndDropIndex({
       type: "dragOverItem",
       payload: idx,
     });
-    //handleSort(dragAndDropIndex.dragItem, dragAndDropIndex.dragOverItem);
+    handleSort(dragAndDropIndex.dragItem, dragAndDropIndex.dragOverItem);
+    //setImages(fake);
   };
   const onDragEnd = (e) => {
-    e.preventDefault();
-    handleSort(dragAndDropIndex.dragItem, dragAndDropIndex.dragOverItem);
+    // e.preventDefault();
+    //handleSort(dragAndDropIndex.dragItem, dragAndDropIndex.dragOverItem);
   };
 
   const handleChange = (idx) => {
