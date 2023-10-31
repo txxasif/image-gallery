@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <main className="max-h-fit max-w-5xl mx-auto flex flex-col items-center justify-center py-5 border mt-2">
+    <main className="max-h-full max-w-5xl mx-auto flex flex-col items-center justify-center py-5 border mt-2">
       <div className="w-full border-b py-1 ">
         {totalSelectedImages ? (
           <TotalSelected

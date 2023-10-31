@@ -23,7 +23,11 @@ export function ImageCard({
         type="checkbox"
         checked={isSelected}
         onClick={() => handleChange(index)}
-        className="absolute top-1 left-1 z-20"
+        className={
+          isSelected
+            ? "absolute  top-1 left-1 z-20 "
+            : "absolute opacity-0 top-1 left-1 z-20 group-hover:opacity-100"
+        }
       />
       <Image
         className={
