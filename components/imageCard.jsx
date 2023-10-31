@@ -10,9 +10,6 @@ export function ImageCard({
   const { isSelected, src } = image;
   return (
     <div
-      draggable
-      onDragStart={(e) => onDragStart(index)}
-      onDragEnter={(e) => onDragEnter(index)}
       className={
         index == 0
           ? "relative border shadow-md  col-span-2 row-span-2 group  hover:cursor-pointer"
@@ -30,6 +27,9 @@ export function ImageCard({
         }
       />
       <Image
+        draggable
+        onDragStart={(e) => onDragStart(index)}
+        onDragEnter={(e) => onDragEnter(index)}
         className={
           isSelected
             ? "h-fit w-fit opacity-30"

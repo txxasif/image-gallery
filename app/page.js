@@ -12,22 +12,18 @@ export default function Home() {
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
 
-  const handleSort = (dragItm, dragOverItm, isDraggedEnd) => {
+  const handleSort = (dragItm, dragOverItm) => {
     let fakeImages = [...images];
     const draggedItemContent = fakeImages.splice(dragItm, 1)[0];
     fakeImages.splice(dragOverItm, 0, draggedItemContent);
     setImages(fakeImages);
-    if (isDraggedEnd) {
-      dragItem.current = null;
-      dragOverItem.current = null;
-    }
   };
   const onDragStart = (idx) => {
     dragItem.current = idx;
   };
   const onDragEnter = (idx) => {
     dragOverItem.current = idx;
-    handleSort(dragItem.current, idx, false);
+    handleSort(dragItem.current, idx);
   };
 
   const handleChange = (idx) => {
