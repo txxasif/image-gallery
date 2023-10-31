@@ -13,14 +13,9 @@ export const imagesLocation = [
 ];
 
 export function imagesReducer(state, action) {
-  console.log(action.type, action.payload);
   switch (action.type) {
     case "images":
       return action.payload;
-    case "select":
-      state[action.payload].isSelected = !state[action.payload].isSelected;
-      console.log(state);
-      return state;
     default:
       return state;
   }
