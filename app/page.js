@@ -28,7 +28,7 @@ import { getImagesSelector, getTotalCount } from "@/store/imageSlice/selector";
 
 export default function Home() {
   const images = useSelector(getImagesSelector);
-  const total = useSelector((state) => state.imageGallery.totalCount);
+  const total = useSelector(getTotalCount);
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
   });

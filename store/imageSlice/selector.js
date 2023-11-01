@@ -7,5 +7,5 @@ export const getImagesSelector = createSelector(
 );
 export const getTotalCount = createSelector(
   [gallery],
-  (gallery) => gallery.getTotalCount
+  (gallery) => gallery.totalCount
 );

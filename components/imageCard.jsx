@@ -4,6 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useDispatch } from "react-redux";
 import { setIsChecked } from "@/store/imageSlice/imageSlice";
+import { Checkbox } from "./ui/checkbox";
 export function ImageCard({ index, image }) {
   const dispatch = useDispatch();
   const { isSelected, src, id } = image;
@@ -29,10 +30,10 @@ export function ImageCard({ index, image }) {
           : "relative border shadow-md group hover:cursor-pointer"
       }
     >
-      <input
+      <Checkbox
         type="checkbox"
         checked={isSelected}
-        onChange={() => {
+        onClick={() => {
           dispatch(setIsChecked(index));
         }}
         className={
