@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-import { Checkbox } from "./ui/checkbox";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setIsChecked } from "@/store/imageSlice/imageSlice";
 export function ImageCard({ index, image }) {
@@ -43,12 +41,12 @@ export function ImageCard({ index, image }) {
             : "absolute opacity-0 top-1 left-1 z-20 group-hover:opacity-100 max-h-48"
         }
       />
-      <div class="absolute opacity-0 fd-sh group-hover:opacity-100 w-full h-full bg-black" />
+      <div class="absolute opacity-0 fd-sh group-hover:opacity-100 w-full h-full bg-black/70" />
       <Image
         className={
           isSelected
-            ? "h-fit w-fit opacity-50"
-            : "h-fit w-fit group-hover:opacity-50"
+            ? "h-fit w-fit opacity-50 group-hover:bg-opacity-0"
+            : "h-fit w-fit group-hover:opacity-50 group-hover:bg-opacity-0"
         }
         src={src}
         alt={src}
