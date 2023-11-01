@@ -11,3 +11,14 @@ export const imagesLocation = [
   { src: "https://i.ibb.co/djqkB7L/image-10.jpg", isSelected: false, id: "10" },
   { src: "https://i.ibb.co/d4G6cph/image-11.jpg", isSelected: false, id: "11" },
 ];
+
+export function indexFinder(ar, id) {
+  console.log("hii");
+  console.log(ar, id);
+  for (let i = 0; i < ar.length; i++) {
+    console.log(ar[i]);
+    if (ar[i].id === id) {
+      return i;
+    }
+  }
+}
