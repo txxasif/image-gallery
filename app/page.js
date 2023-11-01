@@ -1,62 +1,49 @@
 "use client";
-import { imagesLocation, imagesReducer } from "@/imagesArray";
-import Image from "next/image";
+import { imagesLocation } from "@/imagesArray";
 import { useReducer, useRef, useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
 import TotalSelected from "@/components/totalSelected";
 import { AddImage } from "@/components/addImage";
 import { ImageCard } from "@/components/imageCard";
-const initial = {
-  dragItem: 0,
-  dragOverItem: 0,
-};
-function indexReducer(state, action) {
+function imagesReducer(state, action) {
   switch (action.type) {
-    case "dragItem":
-      return { ...state, ["dragItem"]: action.payload };
-    case "dragOverItem":
-      return { ...state, ["dragOverItem"]: action.payload };
+    case "images":
+      return action.payload;
     default:
       return state;
   }
 }
+
 export default function Home() {
   const [images, setImages] = useReducer(imagesReducer, imagesLocation);
   const [totalSelectedImages, setTotalSelected] = useState(0);
-  const [dragAndDropIndex, setDragAndDropIndex] = useReducer(
-    indexReducer,
-    initial
-  );
+
+  const dragItem = useRef(null);
+  const dragOverItem = useRef(null);
 
   const handleSort = (dragItm, dragOverItm) => {
-    let fakeImages = [...images];
-    const [draggedItemContent] = fakeImages.splice(dragItm, 1);
-    fakeImages.splice(dragOverItm, 0, draggedItemContent);
-    if (dragAndDropIndex.dragItem >= 0 && dragAndDropIndex.dragOverItem >= 0) {
+    if (dragItm >= 0 && dragOverItm >= 0 && dragItm !== dragOverItm) {
+      let fakeImages = [...images];
+      const [draggedItemContent] = fakeImages.splice(dragItm, 1);
+      fakeImages.splice(dragOverItm, 0, draggedItemContent);
+
       setImages({
         type: "images",
         payload: fakeImages,
       });
     }
   };
+
   const onDragStart = (idx) => {
-    setDragAndDropIndex({
-      type: "dragItem",
-      payload: idx,
-    });
+    dragItem.current = idx;
   };
+
   const onDragEnter = (idx) => {
-    let fake = [...images];
-    setDragAndDropIndex({
-      type: "dragOverItem",
-      payload: idx,
-    });
-    handleSort(dragAndDropIndex.dragItem, dragAndDropIndex.dragOverItem);
-    //setImages(fake);
+    dragOverItem.current = idx;
   };
+
   const onDragEnd = (e) => {
-    // e.preventDefault();
-    //handleSort(dragAndDropIndex.dragItem, dragAndDropIndex.dragOverItem);
+    e.preventDefault();
+    handleSort(dragItem.current, dragOverItem.current);
   };
 
   const handleChange = (idx) => {
@@ -73,6 +60,7 @@ export default function Home() {
       type: "images",
       payload: temp,
     });
+    dragOverItem.current = null;
   };
 
   const handleDelete = () => {
@@ -98,7 +86,7 @@ export default function Home() {
           <h1 className="px-3 align-middle font-bold">Gallery</h1>
         )}
       </div>
-      <div>{`Selected : ${dragAndDropIndex.dragItem} Over : ${dragAndDropIndex.dragOverItem}`}</div>
+
       <div className="grid px-4 lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-3  py-3">
         {images.map((image, index) => (
           <ImageCard

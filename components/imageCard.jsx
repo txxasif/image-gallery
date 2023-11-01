@@ -7,6 +7,7 @@ export function ImageCard({
   onDragStart,
   handleChange,
   onDragEnd,
+  onDragLeft,
 }) {
   const { isSelected, src } = image;
   return (
@@ -28,7 +29,7 @@ export function ImageCard({
         className={
           isSelected
             ? "absolute  top-1 left-1 z-20 "
-            : "absolute opacity-0 top-1 left-1 z-20 group-hover:opacity-100"
+            : "absolute opacity-0 top-1 left-1 z-20 group-hover:opacity-100 max-h-48"
         }
       />
       <Image
